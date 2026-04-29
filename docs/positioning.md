@@ -10,7 +10,7 @@ wall-clock execution time.
 
 ## One-Liner
 
-Delegate bounded Codex work fast without giving up proof.
+Delegate Codex work at lane speed. Accept it at proof speed.
 
 ## Short Description
 
@@ -19,8 +19,7 @@ parent agent keeps architecture, integration, and final verification.
 
 ## GitHub About
 
-Proof-gated Spark delegation skills for Codex, with TEMPONIZER wall-clock
-calibration.
+Parent-gated delegation protocol for Codex. Proof beats green tests.
 
 ## Topics
 

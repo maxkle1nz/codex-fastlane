@@ -1,7 +1,7 @@
 {
   "name": "codex-fastlane",
   "version": "0.1.0",
-  "description": "Proof-gated Spark delegation skills for Codex, with TEMPONIZER wall-clock calibration.",
+  "description": "Parent-gated delegation protocol for Codex. Proof beats green tests.",
   "author": {
     "name": "Fastlane contributors",
     "url": "https://github.com/maxkle1nz/codex-fastlane"
@@ -22,8 +22,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Fastlane",
-    "shortDescription": "Delegate bounded Codex work fast without giving up proof.",
-    "longDescription": "Fastlane and TempoFastlane turn a worker model into a fast implementer while the parent agent keeps architecture, integration, hardening, and final verification. TempoFastlane adds TEMPONIZER, a phase-aware wall-clock calibration loop for choosing effort, parallelism, and iterate-or-abort decisions from measured runtime rather than inherited duration intuition.",
+    "shortDescription": "Delegate Codex work at lane speed. Accept it at proof speed.",
+    "longDescription": "Fastlane and TempoFastlane turn Spark into a bounded implementation worker while the parent agent keeps architecture, integration, hardening, and final verification. Fastlane fixes the evidence with proof-gated handoffs. TempoFastlane fixes the clock with TEMPONIZER, a phase-aware wall-clock calibration loop for choosing effort, parallelism, and iterate-or-abort decisions from measured runtime rather than inherited duration intuition.",
     "developerName": "Fastlane contributors",
     "category": "Coding",
     "capabilities": [

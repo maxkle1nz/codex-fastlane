@@ -1,14 +1,26 @@
 # Fastlane for Codex
 
-Fastlane is a Codex delegation system for getting more real work out of a
-high-reasoning parent model by sending bounded implementation lanes to
-`gpt-5.3-codex-spark`.
+**Fastlane is the delegation control protocol for Codex.**
 
-The parent model keeps judgment. The lane does bounded implementation. Proof
-decides whether the result is accepted.
+Your parent agent stops burning premium reasoning on mechanical edits. Spark
+builds the lane. Proof, not "tests passed", decides whether the result ships.
+
+Two skills. Zero hype. One operating rule: delegate construction, centralize
+judgment.
 
 Fastlane is for Codex users who want to move beyond single-agent execution:
 more lanes, faster task materialization, more proof, less avoidable rework.
+
+```mermaid
+flowchart LR
+    A["Parent Agent<br/>GPT-5.4 / GPT-5.5"] --> B["Lane Contract<br/>scope, ownership, commands, proof"]
+    B --> C["Spark Worker<br/>gpt-5.3-codex-spark<br/>medium or xhigh"]
+    C --> D["Proof Handoff<br/>files, commands, artifacts, Te"]
+    D --> E["Parent Verify<br/>diff, tests, proof signal"]
+    E --> F{"Accept?"}
+    F -->|yes| G["Integrate"]
+    F -->|no| H["Iterate or reject"]
+```
 
 ## Why This Exists
 
@@ -36,6 +48,25 @@ wall-clock calibration that treats measured runtime as truth.
 
 In practice, the goal is not to make Codex reckless. The goal is to let Codex
 create more lanes, earlier, with better evidence and less rework.
+
+## No Super Prompt Required
+
+Fastlane also helps when you do not have the perfect "super prompt" ready.
+Instead of asking the user to fully design the next implementation prompt, the
+parent agent uses the protocol to inspect the repo, infer local conventions,
+choose the next bounded useful lane, and turn that lane into an implementation
+contract.
+
+That claim comes directly from the skills: before spawning Spark, the parent
+must inspect enough local context, capture a baseline, discover repo-native
+commands, state the mission, assign ownership, define forbidden surfaces, and
+set observable acceptance criteria.
+
+Fastlane is not a roadmap oracle. If the task is still unclear, exploratory, or
+impossible to isolate into a write scope, the protocol says not to delegate yet.
+The promise is narrower and more useful: when the project has an implementable
+next phase, Fastlane helps Codex materialize it as a lane with context,
+ownership, and proof.
 
 ## Skills
 
@@ -83,25 +114,6 @@ That is why Fastlane can make work feel faster without simply lowering the
 quality bar. The system saves time by reducing wasted judgment and catching
 false positives before they become parent-side rework.
 
-## No Super Prompt Required
-
-Fastlane also helps when you do not have the perfect "super prompt" ready.
-Instead of asking the user to fully design the next implementation prompt, the
-parent agent uses the protocol to inspect the repo, infer local conventions,
-choose the next bounded useful lane, and turn that lane into an implementation
-contract.
-
-That claim comes directly from the skills: before spawning Spark, the parent
-must inspect enough local context, capture a baseline, discover repo-native
-commands, state the mission, assign ownership, define forbidden surfaces, and
-set observable acceptance criteria.
-
-Fastlane is not a roadmap oracle. If the task is still unclear, exploratory, or
-impossible to isolate into a write scope, the protocol says not to delegate yet.
-The promise is narrower and more useful: when the project has an implementable
-next phase, Fastlane helps Codex materialize it as a lane with context,
-ownership, and proof.
-
 ## Install
 
 Ask Codex to install the calibrated lane:
@@ -143,10 +155,12 @@ ownership tight and require causal proof before acceptance.
 
 ## What Makes It Different
 
-Fastlane is not a prompt pack and not an "autonomous agent" claim. It is an
-execution protocol for a specific moment: the parent agent has enough context
-to define a bounded slice, but should not spend premium reasoning on mechanical
-construction.
+Most agent repos teach what to know. Fastlane teaches how to delegate.
+
+The failure mode of modern coding agents is not "cannot write code." It is
+"accepts the wrong evidence too early."
+
+Fastlane fixes the evidence. TempoFastlane fixes the clock.
 
 TempoFastlane adds the deeper layer: temporal calibration.
 
@@ -171,6 +185,17 @@ planner and starts creating lanes from measured execution reality.
 
 The repo is designed to make those gains measurable. Use `Te` and proof
 artifacts instead of asking users to trust a speed claim.
+
+## What Fastlane Is Not
+
+- A prompt library.
+- An "autonomous developer" pitch.
+- A 10x productivity claim.
+- A skill catalog.
+- Production-ready by default. Proof is your job.
+- A replacement for parent-side judgment.
+
+It is a delegation protocol with measurable handoffs.
 
 ## Proof Contract
 
