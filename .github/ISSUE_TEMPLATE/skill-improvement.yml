@@ -1,0 +1,34 @@
+name: Skill improvement
+description: Propose a focused improvement to Fastlane or TempoFastlane
+title: "[skill] "
+labels: ["skill-improvement"]
+body:
+  - type: dropdown
+    id: skill
+    attributes:
+      label: Skill
+      options:
+        - fastlane
+        - tempofastlane
+        - both
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What delegation, proof, or calibration problem does this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposed
+    attributes:
+      label: Proposed change
+      description: Keep it universal and repo-agnostic.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Link a case note, measured run, proof artifact, or repeated failure mode if available.

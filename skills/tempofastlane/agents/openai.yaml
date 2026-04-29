@@ -1,0 +1,7 @@
+interface:
+  display_name: "TempoFastlane"
+  short_description: "Spark delegation with proof gates and temporal calibration"
+  default_prompt: "Use $tempofastlane to delegate bounded implementation work to Codex Spark with parent-side integration, causal proof, and TEMPONIZER wall-clock calibration."
+
+policy:
+  allow_implicit_invocation: true

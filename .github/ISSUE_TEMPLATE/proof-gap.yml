@@ -1,0 +1,22 @@
+name: Proof gap
+description: Report a false positive or weak proof pattern
+title: "[proof-gap] "
+labels: ["proof-gap"]
+body:
+  - type: textarea
+    id: scenario
+    attributes:
+      label: Scenario
+      description: What did the worker claim, and what was missing from the proof?
+    validations:
+      required: true
+  - type: textarea
+    id: masking
+    attributes:
+      label: Possible masking path
+      description: What old path, fixture, cache, generator, or command may have hidden the issue?
+  - type: textarea
+    id: better-proof
+    attributes:
+      label: Better proof signal
+      description: What field, log line, artifact, command, or structural snapshot should be required?
