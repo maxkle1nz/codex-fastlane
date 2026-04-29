@@ -7,19 +7,21 @@ installable, proof-aware, and easy to explain.
 
 ## Pre-Launch Checklist
 
-- [ ] Confirm the publishing owner is `maxkle1nz`; update URLs if needed.
-- [ ] Confirm final repo slug, preferably `codex-fastlane`.
-- [ ] Run `python3 scripts/validate-skills.py`.
-- [ ] Run Codex skill validation for both skill folders if available.
+- [x] Confirm the publishing owner is `maxkle1nz`; update URLs if needed.
+- [x] Confirm final repo slug, preferably `codex-fastlane`.
+- [x] Run `python3 scripts/validate-skills.py`.
+- [x] Run Codex skill validation for both skill folders if available.
 - [x] Add an illustrative proof contract example.
 - [ ] Add one real anonymized case note showing a false-positive caught by the
       parent gate.
 - [ ] Add one real anonymized TempoFastlane case note showing `Tp`, `Tc`, and
       `Te`.
-- [ ] Create the GitHub repo with the recommended topics in
+- [x] Create the GitHub repo with the recommended topics in
       [docs/positioning.md](positioning.md).
-- [ ] Use a concise repo description:
+- [x] Use a concise repo description:
       `Proof-gated Spark delegation skills for Codex, with TEMPONIZER wall-clock calibration.`
+- [x] Smoke-test skill installation from the published GitHub repo into a
+      temporary directory.
 
 ## Day-Zero README Order
 
