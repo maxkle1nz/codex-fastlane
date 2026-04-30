@@ -1,39 +1,47 @@
 ---
 name: fastlane
 description: >-
-  Use when delegating fast implementation work to Codex Spark 5.3 with xhigh or
-  medium reasoning, especially for bounded code changes where a parent Codex
-  agent must provide full context, precise ownership, proof criteria,
-  anti-false-positive checks, and then review, harden, and verify the result
-  before acceptance. Treat Fastlane as a living universal workflow: after
-  repeated use, propose skill updates when reusable delegation lessons emerge.
+  Use when delegating fast implementation work to a bounded Codex worker lane
+  such as GPT-5.3-Codex, GPT-5.3-Codex-Spark, or a GPT-5.4 low/mini lane,
+  especially when a high-reasoning parent should preserve cognitive budget for
+  architecture, synthesis, proof, integration, and final acceptance. Treat
+  Fastlane as a living universal workflow: after repeated use, propose skill
+  updates when reusable delegation lessons emerge.
 ---
 
 # Fastlane
 
 ## Purpose
 
-Use this workflow to turn Spark into a fast implementation worker while the
-parent agent stays responsible for architecture, acceptance criteria, proof
-integrity, integration, and final verification.
+Use this workflow to turn a bounded worker model into a fast implementation
+lane while the parent agent stays responsible for architecture, acceptance
+criteria, proof integrity, integration, and final verification.
 
-Spark is excellent for quickly producing a patch when the task is bounded and
-the context is complete. Treat it as a high-speed implementer, not as the final
-gate.
+Worker lanes are excellent for quickly producing a patch when the task is
+bounded and the context is complete. Treat them as high-speed implementers, not
+as the final gate.
 
 ## Operating Rule
 
 **Delegate construction; centralize judgment and integration.**
 
+The parent protects its cognitive budget. A frontier parent may run on a
+premium high-reasoning model, but it should spend that reasoning on translating
+the human idea into mission, architecture, lane contracts, proof design,
+integration, and synthesis. It should write routine code only when the edit is
+smaller than delegation overhead or when it is repairing an integration gap
+found during final proof.
+
 The parent agent must:
 
 - choose whether model control or full-history fork matters more;
+- choose the smallest capable worker lane for the task;
 - take a baseline snapshot before delegation;
 - define the exact mission and write scope;
 - include all critical context and constraints;
 - provide exact verification commands, not guessed script names;
 - require causal proof, not just "tests passed";
-- monitor for scope drift while Spark works;
+- monitor for scope drift while the worker works;
 - inspect the returned patch;
 - integrate the returned work into the surrounding system;
 - perform wiring and hardening before reporting acceptance;
@@ -57,11 +65,14 @@ be useful.
 
 ## Glossary
 
-- **Spark**: short operational name for the worker model. The technical id
-  `gpt-5.3-codex-spark` is used only where model selection or spawn flags
-  matter.
-- **xhigh / medium**: Spark reasoning effort tiers. xhigh for synthesis,
-  medium for mechanical bounded work.
+- **Worker lane**: a bounded sidecar model tasked with construction, audit,
+  research, or support work under a parent-owned contract.
+- **Spark**: short operational name for the `gpt-5.3-codex-spark` research
+  preview lane, used for near-instant compact iteration when available.
+- **Coder lane**: `gpt-5.3-codex` for substantial bounded code-only work when
+  Spark is not needed.
+- **xhigh / high / medium / low**: reasoning effort tiers. Use the lowest tier
+  that can satisfy the proof contract without increasing parent rework.
 - **fork_context**: spawn flag controlling whether the worker inherits the
   parent's full conversation history. `true` inherits and forces parent model
   settings; `false` allows explicit model/effort overrides but requires the
@@ -111,8 +122,8 @@ Update protocol:
 
 Use this skill when the user asks to:
 
-- use Codex Spark, Spark, a worker, subagent, xhigh, or medium for fast
-  implementation;
+- use Codex Spark, GPT-5.3-Codex, a worker, subagent, xhigh, high, medium, or
+  low for fast implementation;
 - test a delegated implementation workflow;
 - split implementation from verification;
 - make a bounded code change where the parent can continue as quality gate.
@@ -125,29 +136,37 @@ Avoid this workflow when:
 - the write scope cannot be isolated;
 - a false positive would be expensive and no runtime proof is possible.
 
-## Effort Selection
+## Model And Effort Selection
 
-Default to `gpt-5.3-codex-spark` with **xhigh** when the task touches
-architecture, generators, runtime proof, profile contracts, data migrations,
-public behavior, or several coupled files. Use xhigh when a wrong local choice
-would create parent rework.
+Choose the worker by lane fit first, then reasoning effort.
 
-Use `gpt-5.3-codex-spark` with **medium** only when all of these are true:
+- Use `gpt-5.3-codex` as the default coder lane for bounded code-only
+  implementation, debugging, focused refactors, tests, and repo-native patches.
+- Use `gpt-5.3-codex-spark` when near-instant compact text/code iteration
+  matters and Spark is available.
+- Use `gpt-5.4` low or `gpt-5.4-mini` medium for low-risk mechanical support
+  lanes where speed and cost matter.
+- Use `gpt-5.4` high or `gpt-5.5` high for audit lanes, proof-gap hunting, and
+  edge-case review.
+- Keep `gpt-5.5` high/xhigh primarily as the parent or rare frontier worker for
+  ambiguous, long-context, high-stakes synthesis.
+
+Use medium or low only when all of these are true:
 
 - the task is bounded and mechanical;
 - the write set is small and explicitly owned;
 - the existing pattern is clear;
 - acceptance criteria are observable;
 - the parent can cheaply inspect and rerun verification;
-- the worker is not being asked to make product, architecture, or proof-policy
-  decisions.
+- the worker is not being asked to make product, architecture, model-selection,
+  or proof-policy decisions.
 
-Medium is a cost-control lane, not a context-control lane. Give it the same
-full task context, baseline dirty state, file ownership, forbidden surfaces,
-proof criteria, and final handoff requirements as xhigh. **Reduce task size,
-not instruction quality.**
+Low and medium are cost-control lanes, not context-control lanes. Give them the
+same full task context, baseline dirty state, file ownership, forbidden
+surfaces, proof criteria, and final handoff requirements as high or xhigh.
+**Reduce task size, not instruction quality.**
 
-Escalate from medium to xhigh when:
+Escalate effort or model when:
 
 - the worker must infer missing architecture;
 - the patch crosses ownership boundaries;
@@ -161,31 +180,31 @@ experiments happen only inside the sidecar worker.
 
 ## Delegation Protocol
 
-### Before spawning Spark
+### Before spawning the worker
 
 1. Inspect enough local context to write a precise task.
 2. Capture a baseline: `git status -sb`, relevant focused diff/grep, and known
    command names from `package.json` or repo scripts.
 3. Decide spawn mode:
-   - To force `gpt-5.3-codex-spark` with xhigh or medium, spawn with
+   - To force a specific worker model or effort, spawn with
      `fork_context: false` and embed full task context in the prompt.
    - When full conversation history matters more, use `fork_context: true`
      and omit model/effort overrides because forked agents inherit the parent
      settings.
 4. State the implementation goal in one paragraph.
 5. Give explicit file ownership and forbidden surfaces.
-6. Tell Spark it is not alone in the codebase and must not revert unrelated
+6. Tell the worker it is not alone in the codebase and must not revert unrelated
    changes.
 7. Define acceptance criteria in terms of observable proof.
 8. Require final handoff with files changed, commands run, proof artifacts,
-   exact proof fields, limitations, and concerns.
+   exact proof fields, model/effort rationale, limitations, and concerns.
 
-### Parent Integration Loop (after Spark returns)
+### Parent Integration Loop
 
 1. Read the changed files or focused diff.
-2. Compare the result against the baseline: distinguish files Spark actually
+2. Compare the result against the baseline: distinguish files the worker actually
    changed from files already dirty before delegation.
-3. Integrate the patch with adjacent code paths Spark did not own: CLI
+3. Integrate the patch with adjacent code paths the worker did not own: CLI
    wiring, imports, registry entries, docs hooks, fixtures, schemas,
    adapters, generated-contract surfaces, or artifact plumbing when those
    are required for the feature to be usable.
@@ -208,20 +227,20 @@ converted the worker's slice into an integrated, verifiable repo state.
 Discard the patch and re-delegate with smaller scope (do not try to salvage)
 when any of these appear:
 
-- gross ownership violation (Spark wrote outside declared owned files);
+- gross ownership violation (worker wrote outside declared owned files);
 - fabricated proof (claimed artifacts that do not exist or use the legacy
   path);
 - broad unauthorized rewrite of files the patch was not supposed to touch;
 - handoff claims pre-existing dirty files as newly created;
 - repeated guessed command names after the parent supplied the real ones.
 
-Iterate (ask Spark to refine) when:
+Iterate (ask the worker to refine) when:
 
 - ownership was respected but proof signal is weak;
 - wiring is missing but the core slice is correct;
 - a single anti-false-positive check needs adding.
 
-### While Spark is still running
+### While the worker is still running
 
 - Do useful non-overlapping review setup locally.
 - If the worker runs longer than expected, inspect `git status`, focused
@@ -267,10 +286,10 @@ Do not accept:
   was running.
 - A guessed command name when the repo has a different script in
   `package.json`.
-- A handoff that claims already-dirty files were newly created by Spark.
+- A handoff that claims already-dirty files were newly created by the worker.
 - Docs claiming success before proof artifacts confirm it.
 
-Ask Spark to explicitly answer:
+Ask the worker to explicitly answer:
 
 - What proves the new code path ran?
 - Which proof file contains it?
@@ -278,6 +297,7 @@ Ask Spark to explicitly answer:
 - What could still be masking a false positive?
 - Which commands were copied from repo scripts, and which were inferred?
 - Which files were already dirty before it started?
+- Which model and effort were used, and why was that lane chosen?
 - Did this run reveal a reusable Fastlane workflow improvement the parent
   should consider?
 
@@ -286,17 +306,17 @@ Ask Spark to explicitly answer:
 Fastlane tasks often fail for boring reasons: wrong script name, no dev
 server, stale port, missing env, or a worker assuming a runtime is alive.
 
-Before delegation, the parent should give Spark:
+Before delegation, the parent should give the worker:
 
 - exact command names copied from `package.json`, Makefile, task runner, or
   docs;
 - required services and ports, for example `npm run dev` serving
   `http://127.0.0.1:7777`;
-- whether Spark may start background services or should leave runtime proof
+- whether the worker may start background services or should leave runtime proof
   to the parent;
 - expected artifact paths for browser screenshots, logs, or proof JSON.
 
-If a runtime command fails, Spark must classify it:
+If a runtime command fails, the worker must classify it:
 
 - `code-failure`: the patch broke behavior;
 - `environment-blocker`: service, port, credential, or external runtime
@@ -307,7 +327,7 @@ The parent still reruns the final runtime proof independently.
 
 ## Prompt Template
 
-Read `references/delegation-template.md` when preparing a Spark task. It
+Read `references/delegation-template.md` when preparing a worker task. It
 contains a reusable prompt with context, ownership, acceptance criteria,
 verification, and handoff sections.
 
@@ -329,8 +349,8 @@ Group A: **Pre-acceptance (mandatory before any sign-off)**
 - [ ] Parent used the correct spawn mode for the goal: model override
       without full fork, or full fork without override.
 - [ ] Baseline dirty state was captured before delegation.
-- [ ] Spark changed only owned files or justified exceptions.
-- [ ] Spark did not claim pre-existing dirty/new files as newly created by
+- [ ] Worker changed only owned files or justified exceptions.
+- [ ] Worker did not claim pre-existing dirty/new files as newly created by
       its patch.
 - [ ] Verification command names match actual repo scripts.
 - [ ] Unit tests pass locally.

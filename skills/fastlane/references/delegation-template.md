@@ -1,6 +1,6 @@
 # Fastlane Delegation Template
 
-Use this template when spawning a Codex Spark 5.3 worker for implementation.
+Use this template when spawning a bounded worker lane for implementation.
 
 ## Prompt
 
@@ -14,10 +14,12 @@ Task: <clear feature/checkpoint/bug title>.
 You are not alone in the codebase. Do not revert unrelated changes. Work with the existing dirty state. Do not modify files outside your ownership unless a verification failure truly requires it; if you must, explain why.
 
 Spawn contract:
-- You are intentionally running as Codex Spark 5.3 `<xhigh|medium>`.
+- Lane type: `<spark|coder|fastworker|auditer|researcher|creative>`.
+- Model and effort: `<model id>` at `<low|medium|high|xhigh>`.
+- Rationale: `<why this is the smallest capable lane for the contract>`.
 - This prompt is self-contained because full-history fork is not used when the parent must force this model.
 - If critical context appears missing, inspect the repo and state the assumption rather than inventing background.
-- Medium lane note, if applicable: this is a bounded implementation slice. Do not make architecture or proof-policy decisions; surface uncertainty to the parent.
+- Low/medium lane note, if applicable: this is a bounded implementation slice. Do not make architecture, model-selection, or proof-policy decisions; surface uncertainty to the parent.
 
 Baseline from parent:
 - Branch / worktree state: `<git status -sb summary>`
@@ -76,6 +78,7 @@ Verification to run before final response:
 
 Final handoff must include:
 - What changed
+- Lane type, model, effort, and why this lane was chosen
 - Files changed by you, separated from files that were already dirty before you started
 - Commands run and results
 - Proof artifact paths

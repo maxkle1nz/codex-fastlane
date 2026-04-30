@@ -23,7 +23,7 @@
   "interface": {
     "displayName": "Fastlane",
     "shortDescription": "Delegate Codex work at lane speed. Accept it at proof speed.",
-    "longDescription": "Fastlane and TempoFastlane turn Spark into a bounded implementation worker while the parent agent keeps architecture, integration, hardening, and final verification. Fastlane fixes the evidence with proof-gated handoffs. TempoFastlane fixes the clock with TEMPONIZER, a phase-aware wall-clock calibration loop for choosing effort, parallelism, and iterate-or-abort decisions from measured runtime rather than inherited duration intuition.",
+    "longDescription": "Fastlane and TempoFastlane turn worker models into bounded implementation lanes while the parent agent preserves premium reasoning for architecture, synthesis, integration, hardening, and final verification. Fastlane fixes the evidence with proof-gated handoffs. TempoFastlane fixes the clock with TEMPONIZER, a phase-aware wall-clock calibration loop for choosing effort, parallelism, and iterate-or-abort decisions from measured runtime rather than inherited duration intuition.",
     "developerName": "Fastlane contributors",
     "category": "Coding",
     "capabilities": [
@@ -33,7 +33,7 @@
     "websiteURL": "https://github.com/maxkle1nz/codex-fastlane",
     "defaultPrompt": [
       "Use TempoFastlane for this bounded implementation.",
-      "Use Fastlane to delegate this slice to Spark.",
+      "Use Fastlane to delegate this slice to the right worker lane.",
       "Review this worker patch with proof gates."
     ],
     "brandColor": "#0F766E"

@@ -7,16 +7,18 @@
 
 **Fastlane is the delegation control protocol for Codex.**
 
-**Spark writes. Parent decides. Proof ships.**
+**Workers write. Parent decides. Proof ships.**
 
-Your parent agent stops burning premium reasoning on mechanical edits. Spark
-builds the lane. Proof, not "tests passed", decides whether the result ships.
+Your parent agent stops burning premium reasoning on mechanical edits. Bounded
+worker lanes build the slice. Proof, not "tests passed", decides whether the
+result ships.
 
 Two skills. Zero hype. One operating rule: delegate construction, centralize
 judgment.
 
-Fastlane is for Codex users who want to move beyond single-agent execution:
-more lanes, faster task materialization, more proof, less avoidable rework.
+Fastlane is for Codex users who want to move beyond single-agent execution: a
+frontier parent model acting as technical manager, multiple worker lanes doing
+bounded construction, more proof, and less avoidable rework.
 
 > [!IMPORTANT]
 > Green tests are not proof. If the new path did not leave evidence, it did not
@@ -24,9 +26,9 @@ more lanes, faster task materialization, more proof, less avoidable rework.
 
 ```mermaid
 flowchart LR
-    A["Parent Agent<br/>GPT-5.4 / GPT-5.5"] --> B["Lane Contract<br/>scope, ownership, commands, proof"]
-    B --> C["Spark Worker<br/>gpt-5.3-codex-spark<br/>medium or xhigh"]
-    C --> D["Proof Handoff<br/>files, commands, artifacts, Te"]
+    A["Parent Agent<br/>GPT-5.5 / GPT-5.4"] --> B["Lane Contract<br/>scope, ownership, commands, proof"]
+    B --> C["Worker Lane<br/>Spark, Coder, Fastworker, Auditer"]
+    C --> D["Proof Handoff<br/>model, files, commands, artifacts, Te"]
     D --> E["Parent Verify<br/>diff, tests, proof signal"]
     E --> F{"Accept?"}
     F -->|yes| G["Integrate"]
@@ -40,21 +42,22 @@ flowchart LR
 - 🧪 Causal proof requirements.
 - 🧾 Handoff with files, commands, artifacts, proof fields, dirty state, and
   limitations.
+- 🧠 Explicit model and effort choice.
 - 🛑 Parent-side acceptance gate.
 - 🕒 Optional `Te` measurements with TempoFastlane.
 
 ## 🧠 Why This Exists
 
-High-reasoning Codex sessions are valuable. GPT-5.4 and GPT-5.5 are excellent
-as parent agents because they can hold architecture, tradeoffs, integration,
-and acceptance criteria. The mistake is spending that judgment on every
-mechanical edit, every obvious test patch, and every bounded implementation
-slice.
+High-reasoning Codex sessions are valuable. GPT-5.5 xhigh is strongest when it
+acts like a technical manager: holding the human idea, architecture, tradeoffs,
+integration, and acceptance criteria until the mission is done. The mistake is
+spending that judgment on every mechanical edit, obvious test patch, and
+bounded implementation slice.
 
-Fastlane turns Codex into a technical manager for its own Spark workers:
+Fastlane turns Codex into a technical manager for its own worker lanes:
 
 - the parent defines the mission, ownership, constraints, and proof contract;
-- `gpt-5.3-codex-spark` executes a narrow lane with complete context;
+- the selected worker model executes a narrow lane with complete context;
 - the parent reviews, hardens, integrates, and verifies before acceptance.
 
 This matters because most agent delegation fails in two places:
@@ -78,7 +81,7 @@ parent agent uses the protocol to inspect the repo, infer local conventions,
 choose the next bounded useful lane, and turn that lane into an implementation
 contract.
 
-That claim comes directly from the skills: before spawning Spark, the parent
+That claim comes directly from the skills: before spawning a worker, the parent
 must inspect enough local context, capture a baseline, discover repo-native
 commands, state the mission, assign ownership, define forbidden surfaces, and
 set observable acceptance criteria.
@@ -97,30 +100,38 @@ ownership, and proof.
 | Worker handoff says "tests passed." | Handoff names files, commands, artifacts, proof fields, dirty state, and limitations. |
 | Broad task scope can drift. | Owned files and forbidden surfaces constrain the lane. |
 | False positives can survive green tests. | Parent accepts only after causal proof. |
-| Premium reasoning gets spent on low-value construction. | Spark materializes the slice while the parent keeps judgment. |
+| Premium reasoning gets spent on low-value construction. | Worker lanes materialize the slice while the parent keeps judgment. |
 
 ## 🏁 Skills
 
 | Skill | Use it when | Core idea |
 | --- | --- | --- |
-| `fastlane` | You want a disciplined Spark delegation workflow. | Delegate construction to `gpt-5.3-codex-spark`; centralize judgment and final proof in the parent. |
+| `fastlane` | You want a disciplined delegation workflow. | Delegate construction to a bounded worker lane; centralize judgment and final proof in the parent. |
 | `tempofastlane` | You want the faster, calibrated lane. | Fastlane plus TEMPONIZER, which corrects inherited time estimates with measured execution time. |
 
-## ⚡ Spark Lanes
+## 🧭 Lane Router
 
-Fastlane uses Codex 5.3 Spark in two lane modes:
+Fastlane is no longer only "Spark or nothing." The system selects the smallest
+capable worker for the contract:
 
-- `medium`: for compact, mechanical, pattern-following work where the parent
-  has already made the product, architecture, and proof-policy decisions;
-- `xhigh`: for coupled implementation, generators, runtime proof, public
-  behavior, or tasks where a wrong local choice would create parent rework.
+- `spark`: `gpt-5.3-codex-spark` for near-instant compact iteration when
+  available;
+- `coder`: `gpt-5.3-codex` for bounded code-only implementation, debugging,
+  tests, and focused refactors;
+- `fastworker`: `gpt-5.4` low or `gpt-5.4-mini` medium for low-risk mechanical
+  support work;
+- `auditer`: `gpt-5.4` high or `gpt-5.5` high for review, proof gaps, and edge
+  cases;
+- `parent`: usually `gpt-5.5` or `gpt-5.4` at high/xhigh, reserved for
+  synthesis, architecture, final proof, and integration judgment.
 
-Both modes get the same discipline: complete context, explicit ownership,
-forbidden surfaces, repo-native commands, proof criteria, and a required
-handoff. The difference is task risk, not prompt quality.
+Every mode gets the same discipline: complete context, explicit ownership,
+forbidden surfaces, repo-native commands, proof criteria, model/effort
+rationale, and a required handoff. The difference is lane fit, task risk, and
+expected parent rework, not prompt quality.
 
-That is the speed engine. Spark can materialize bounded work quickly when the
-parent describes the lane precisely and keeps acceptance centralized.
+See [docs/model-matrix.md](docs/model-matrix.md) for the source-backed model
+matrix and the parent cognitive budget rule.
 
 ## ⚙️ How The System Works
 
@@ -129,8 +140,8 @@ Fastlane is built around one operating rule:
 > Delegate construction; centralize judgment and integration.
 
 The parent agent does not disappear. It becomes more important. It decides what
-should be delegated, chooses `medium` or `xhigh`, gives the lane exact context,
-prevents scope drift, and rejects weak proof.
+should be delegated, chooses the lane model and reasoning effort, gives the
+lane exact context, prevents scope drift, and rejects weak proof.
 
 Each lane carries:
 
@@ -139,6 +150,7 @@ Each lane carries:
 - forbidden surfaces;
 - exact repo-native verification commands;
 - a proof contract that forces the new path to leave an observable signal;
+- a model/effort rationale;
 - a handoff that separates actual lane changes from pre-existing dirty files.
 
 That is why Fastlane can make work feel faster without simply lowering the
@@ -222,8 +234,8 @@ for architecture, final integration, and proof. Measure Te per phase if feasible
 Or use the simpler lane:
 
 ```text
-Use $fastlane to delegate this bounded implementation slice to Spark. Keep
-ownership tight and require causal proof before acceptance.
+Use $fastlane to delegate this bounded implementation slice to the right worker
+lane. Keep ownership tight and require causal proof before acceptance.
 ```
 
 ## 🧭 What Makes It Different
@@ -309,6 +321,7 @@ The combination is simple: discover better, delegate narrower, verify harder.
 +-- docs/
 |   +-- launch-plan.md
 |   +-- market-map.md
+|   +-- model-matrix.md
 |   +-- positioning.md
 +-- examples/
 +-- scripts/
@@ -344,12 +357,14 @@ python3 ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/t
 - No telemetry.
 - No secrets.
 - No background services.
-- No model lock-in beyond the current Spark delegation lane described in the
-  skills.
+- No model lock-in beyond the current lane contracts described in the skills.
 - Public claims must be backed by examples, case notes, or measured proof.
 
 ## Sources
 
 - [OpenAI Codex skills documentation](https://developers.openai.com/codex/skills)
+- [OpenAI Codex models documentation](https://developers.openai.com/codex/models)
+- [OpenAI Codex subagents documentation](https://developers.openai.com/codex/concepts/subagents)
+- [OpenAI GPT-5.5 release notes](https://openai.com/index/introducing-gpt-5-5/)
 - [openai/skills](https://github.com/openai/skills)
 - [Agent Skills standard](https://agentskills.io)

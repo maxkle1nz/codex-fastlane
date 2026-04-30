@@ -11,6 +11,9 @@ pre-existing dirty state.
 
 ## Temporal Calibration
 
+- Lane type: `<spark|coder|fastworker|auditer|researcher|creative>`.
+- Model and effort: `<model id>` at `<low|medium|high|xhigh>`.
+- Rationale: `<why this is the smallest capable lane after temporal correction>`.
 - Expected phases: `GEN`, `IO`, `DBG`, `PAR`.
 - Initial inherited estimate (`Tp`): `<state if useful>`.
 - Corrected estimate (`Tc = alpha(phi) * Tp`): `<state in smallest unit that fits>`.
@@ -64,6 +67,7 @@ If a command fails, classify it as `code-failure`, `environment-blocker`, or
 Return:
 
 - files changed;
+- lane type, model, effort, and why this lane was chosen;
 - commands run and exact result;
 - proof artifacts and exact fields/log lines that prove the new path ran;
 - limitations or concerns;

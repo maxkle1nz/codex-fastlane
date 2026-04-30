@@ -14,8 +14,9 @@ Delegate Codex work at lane speed. Accept it at proof speed.
 
 ## Short Description
 
-Fastlane and TempoFastlane turn a worker model into a fast implementer while the
-parent agent keeps architecture, integration, and final verification.
+Fastlane and TempoFastlane turn worker models into bounded implementers while
+the parent agent preserves premium reasoning for architecture, synthesis,
+integration, and final verification.
 
 ## GitHub About
 
@@ -59,6 +60,7 @@ Secondary:
 3. Proof must identify the new path, not merely show a passing command.
 4. Time estimates from language models are inherited priors, not measurements.
 5. TempoFastlane improves by measuring `Te` and recalibrating future choices.
+6. Frontier parent models should manage lanes before they write routine code.
 
 ## The Wedge
 
@@ -100,7 +102,9 @@ Version 0.2:
 
 - add more real case notes;
 - add proof artifact examples;
-- add a lightweight benchmark log format for `Tp`, `Tc`, and `Te`.
+- add a lightweight benchmark log format for `Tp`, `Tc`, and `Te`;
+- add lane-selection telemetry for model, effort, parent rework, and acceptance
+  outcome.
 
 Version 0.3:
 

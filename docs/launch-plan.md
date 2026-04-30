@@ -12,6 +12,7 @@ installable, proof-aware, and easy to explain.
 - [x] Run `python3 scripts/validate-skills.py`.
 - [x] Run Codex skill validation for both skill folders if available.
 - [x] Add an illustrative proof contract example.
+- [x] Add a source-backed model matrix for lane selection.
 - [ ] Add one real anonymized case note showing a false-positive caught by the
       parent gate.
 - [ ] Add one real anonymized TempoFastlane case note showing `Tp`, `Tc`, and
@@ -19,7 +20,7 @@ installable, proof-aware, and easy to explain.
 - [x] Create the GitHub repo with the recommended topics in
       [docs/positioning.md](positioning.md).
 - [x] Use a concise repo description:
-      `Proof-gated Spark delegation skills for Codex, with TEMPONIZER wall-clock calibration.`
+      `Parent-gated delegation protocol for Codex. Proof beats green tests.`
 - [x] Smoke-test skill installation from the published GitHub repo into a
       temporary directory.
 
@@ -57,6 +58,8 @@ Repo: https://github.com/maxkle1nz/codex-fastlane
 
 - Add real-world proof artifact examples.
 - Add a `Tp`/`Tc`/`Te` benchmark log template.
+- Add lane telemetry examples for `model`, `effort`, `Te`, parent rework, and
+  acceptance outcome.
 - Add cross-agent compatibility notes.
 - Add more case notes from generator, frontend, and test-repair runs.
 - Package as an installable Codex plugin once the public plugin path is final.

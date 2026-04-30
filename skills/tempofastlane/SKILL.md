@@ -2,13 +2,11 @@
 name: tempofastlane
 description: >-
   Unified delegation and temporal-calibration protocol. Use when delegating
-  bounded implementation work to a worker model (Codex Spark 5.3 at xhigh or
-  medium reasoning) while the parent agent retains responsibility for
-  architecture, acceptance criteria, proof integrity, integration, and final
-  verification. Embeds TEMPONIZER (phase-aware temporal self-correction) into
-  every effort, abort/iterate, and parallelism decision. Treat as a living
-  universal workflow: after repeated use, propose skill updates only when
-  reusable delegation lessons emerge.
+  bounded implementation work to a worker model such as GPT-5.3-Codex,
+  GPT-5.3-Codex-Spark, or a GPT-5.4 low/mini lane while the high-reasoning
+  parent preserves cognitive budget for architecture, synthesis, proof,
+  integration, and final verification. Embeds TEMPONIZER into effort,
+  abort/iterate, and parallelism decisions.
 ---
 
 # TempoFastlane
@@ -31,9 +29,17 @@ The parent enforces ownership, proof, integration, and hardening.
 **Delegate construction; centralize judgment and integration. Apply temporal
 calibration before any delegation, scoping, or iteration decision is made.**
 
+The parent protects its cognitive budget. A frontier parent may run on a
+premium high-reasoning model, but it should spend that reasoning on translating
+the human idea into mission, architecture, lane contracts, proof design,
+integration, and synthesis. It should write routine code only when the edit is
+smaller than delegation overhead or when it is repairing an integration gap
+found during final proof.
+
 The parent agent must:
 
 - decide whether model control or full-history fork matters more;
+- choose the smallest capable worker lane for the task;
 - take a baseline snapshot before delegation;
 - define the exact mission and write scope;
 - include all critical context and constraints;
@@ -106,11 +112,14 @@ be useful.
 
 ## Glossary
 
-- **Worker**: operational name for the delegated implementer model. The
-  technical id `gpt-5.3-codex-spark` is used only where model selection or spawn
-  flags matter.
-- **xhigh / medium**: worker reasoning effort tiers. xhigh for synthesis;
-  medium for mechanical bounded work.
+- **Worker lane**: operational name for the delegated model tasked with
+  construction, audit, research, or support work under a parent-owned contract.
+- **Spark**: `gpt-5.3-codex-spark`, a research preview lane for near-instant
+  compact text/code iteration when available.
+- **Coder lane**: `gpt-5.3-codex` for substantial bounded code-only work when
+  Spark is not needed.
+- **xhigh / high / medium / low**: reasoning effort tiers. Use the lowest tier
+  that can satisfy the proof contract without increasing parent rework.
 - **fork_context**: spawn flag controlling whether the worker inherits the
   parent's full conversation history. `true` inherits and forces parent model
   settings. `false` allows explicit model and effort overrides but requires the
@@ -169,8 +178,8 @@ limit.
 
 Use this skill when the user asks to:
 
-- use Codex Spark, Spark, a worker, subagent, xhigh, or medium for fast
-  implementation;
+- use Codex Spark, GPT-5.3-Codex, a worker, subagent, xhigh, high, medium, or
+  low for fast implementation;
 - test a delegated implementation workflow;
 - split implementation from verification;
 - make a bounded code change where the parent can continue as quality gate.
@@ -182,33 +191,41 @@ Avoid this workflow when:
 - the write scope cannot be isolated;
 - a false positive would be expensive and no runtime proof is possible.
 
-## Effort Selection
+## Model And Effort Selection
 
 Effort is chosen on temporal-corrected grounds, not on intuitive task size.
 Compute `Tc = alpha(phi) * Tp` and assess parental rework risk before selecting
 a tier.
 
-Default to `gpt-5.3-codex-spark` with **xhigh** when the task touches
-architecture, generators, runtime proof, profile contracts, data migrations,
-public behavior, or several coupled files. Use xhigh when a wrong local choice
-would create parent rework.
+Choose the worker by lane fit first, then reasoning effort:
 
-Use `gpt-5.3-codex-spark` with **medium** only when all of these are true:
+- `coder`: `gpt-5.3-codex` medium/high for bounded code-only implementation,
+  debugging, focused refactors, tests, and repo-native patches.
+- `spark`: `gpt-5.3-codex-spark` medium/xhigh for near-instant compact
+  iteration when Spark is available.
+- `fastworker`: `gpt-5.4` low or `gpt-5.4-mini` medium for low-risk mechanical
+  support lanes.
+- `auditer`: `gpt-5.4` high or `gpt-5.5` high for proof-gap hunting, edge-case
+  review, and security-shaped checks.
+- `parent`: `gpt-5.5` or `gpt-5.4` high/xhigh for mission synthesis,
+  architecture, final proof, and integration judgment.
+
+Use low or medium only when all of these are true:
 
 - the task is bounded and mechanical;
 - the write set is small and explicitly owned;
 - the existing pattern is clear;
 - acceptance criteria are observable;
 - the parent can cheaply inspect and rerun verification;
-- the worker is not being asked to make product, architecture, or proof-policy
-  decisions.
+- the worker is not being asked to make product, architecture, model-selection,
+  or proof-policy decisions.
 
-Medium is a cost-control lane, not a context-control lane. Give it the same
-full task context, baseline dirty state, file ownership, forbidden surfaces,
-proof criteria, and final handoff requirements as xhigh. **Reduce task size,
-not instruction quality.**
+Low and medium are cost-control lanes, not context-control lanes. Give them the
+same full task context, baseline dirty state, file ownership, forbidden
+surfaces, proof criteria, and final handoff requirements as high or xhigh.
+**Reduce task size, not instruction quality.**
 
-Escalate from medium to xhigh when:
+Escalate model or effort when:
 
 - the worker must infer missing architecture;
 - the patch crosses ownership boundaries;
@@ -232,7 +249,7 @@ xhigh. Size intuition is `Tp` inflated by TIB; do not let it drive tier choice.
 2. Capture a baseline: `git status -sb`, relevant focused diff or grep, and
    known command names from `package.json` or repo scripts.
 3. Decide spawn mode:
-   - To force `gpt-5.3-codex-spark` with xhigh or medium, spawn with
+   - To force a specific worker model or effort, spawn with
      `fork_context: false` and embed full task context in the prompt.
    - When full conversation history matters more, use `fork_context: true` and
      omit model/effort overrides because forked agents inherit parent settings.

@@ -61,7 +61,7 @@ Recommended category:
 
 Alternative category phrases:
 
-- Spark delegation protocol
+- Model-routed delegation protocol
 - Proof-gated worker delegation
 - Temporal calibration for coding agents
 - Parent-gated implementation lane
