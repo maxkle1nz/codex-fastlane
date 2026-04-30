@@ -75,7 +75,9 @@ Use:
   ownership, phase, wall clock;
 - direct maintainer verbs: verify, constrain, measure, integrate, harden,
   accept, reject;
-- confidence that comes from limits.
+- confidence that comes from limits;
+- visual symbols when they map to the system: 🏁 lanes, ⚡ Spark, 🧪 proof,
+  🛑 parent gates, 🧭 judgment, and 🕒 temporal calibration.
 
 Avoid:
 
@@ -84,7 +86,7 @@ Avoid:
 - "10x";
 - "production-ready";
 - "never fails";
-- jokes inside the core README.
+- decorative emoji that does not map to the protocol.
 
 ## Product Ladder
 

@@ -1,6 +1,13 @@
-# Fastlane for Codex
+# 🏁 Fastlane for Codex
+
+![Codex Skill](https://img.shields.io/badge/Codex-Skill-0F766E)
+![Proof Gated](https://img.shields.io/badge/Proof-Gated-blue)
+![Telemetry](https://img.shields.io/badge/Telemetry-None-green)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow)
 
 **Fastlane is the delegation control protocol for Codex.**
+
+**Spark writes. Parent decides. Proof ships.**
 
 Your parent agent stops burning premium reasoning on mechanical edits. Spark
 builds the lane. Proof, not "tests passed", decides whether the result ships.
@@ -10,6 +17,10 @@ judgment.
 
 Fastlane is for Codex users who want to move beyond single-agent execution:
 more lanes, faster task materialization, more proof, less avoidable rework.
+
+> [!IMPORTANT]
+> Green tests are not proof. If the new path did not leave evidence, it did not
+> run.
 
 ```mermaid
 flowchart LR
@@ -22,7 +33,17 @@ flowchart LR
     F -->|no| H["Iterate or reject"]
 ```
 
-## Why This Exists
+## ⚡ What Every Lane Gets
+
+- 🎯 Exact ownership.
+- 🚧 Forbidden surfaces.
+- 🧪 Causal proof requirements.
+- 🧾 Handoff with files, commands, artifacts, proof fields, dirty state, and
+  limitations.
+- 🛑 Parent-side acceptance gate.
+- 🕒 Optional `Te` measurements with TempoFastlane.
+
+## 🧠 Why This Exists
 
 High-reasoning Codex sessions are valuable. GPT-5.4 and GPT-5.5 are excellent
 as parent agents because they can hold architecture, tradeoffs, integration,
@@ -49,7 +70,7 @@ wall-clock calibration that treats measured runtime as truth.
 In practice, the goal is not to make Codex reckless. The goal is to let Codex
 create more lanes, earlier, with better evidence and less rework.
 
-## No Super Prompt Required
+## ✍️ No Super Prompt Required
 
 Fastlane also helps when you do not have the perfect "super prompt" ready.
 Instead of asking the user to fully design the next implementation prompt, the
@@ -68,14 +89,24 @@ The promise is narrower and more useful: when the project has an implementable
 next phase, Fastlane helps Codex materialize it as a lane with context,
 ownership, and proof.
 
-## Skills
+## 🔁 Before / After
+
+| Before Fastlane | With Fastlane |
+| --- | --- |
+| Parent writes every mechanical edit. | Parent scopes the next bounded lane. |
+| Worker handoff says "tests passed." | Handoff names files, commands, artifacts, proof fields, dirty state, and limitations. |
+| Broad task scope can drift. | Owned files and forbidden surfaces constrain the lane. |
+| False positives can survive green tests. | Parent accepts only after causal proof. |
+| Premium reasoning gets spent on low-value construction. | Spark materializes the slice while the parent keeps judgment. |
+
+## 🏁 Skills
 
 | Skill | Use it when | Core idea |
 | --- | --- | --- |
 | `fastlane` | You want a disciplined Spark delegation workflow. | Delegate construction to `gpt-5.3-codex-spark`; centralize judgment and final proof in the parent. |
 | `tempofastlane` | You want the faster, calibrated lane. | Fastlane plus TEMPONIZER, which corrects inherited time estimates with measured execution time. |
 
-## Spark Lanes
+## ⚡ Spark Lanes
 
 Fastlane uses Codex 5.3 Spark in two lane modes:
 
@@ -91,7 +122,7 @@ handoff. The difference is task risk, not prompt quality.
 That is the speed engine. Spark can materialize bounded work quickly when the
 parent describes the lane precisely and keeps acceptance centralized.
 
-## How The System Works
+## ⚙️ How The System Works
 
 Fastlane is built around one operating rule:
 
@@ -114,7 +145,49 @@ That is why Fastlane can make work feel faster without simply lowering the
 quality bar. The system saves time by reducing wasted judgment and catching
 false positives before they become parent-side rework.
 
-## Install
+## 🧪 Fastlane vs Normal Subagents
+
+| Normal subagent | Fastlane |
+| --- | --- |
+| "Tests passed." | Names the exact proof artifact. |
+| Broad task scope. | Explicit owned files and forbidden surfaces. |
+| Vague summary. | Files, commands, proof fields, limitations, and dirty state. |
+| Parent trusts the handoff. | Parent independently verifies. |
+| Faster drift. | Proof-gated velocity. |
+
+## 🧾 What A Valid Handoff Looks Like
+
+```text
+Lane: generated runtime smoke
+Owned files:
+- src/runtime/smoke.ts
+- tests/runtime-smoke.test.ts
+
+Commands:
+- npm test -- runtime-smoke
+- npm run smoke:runtime
+
+Proof:
+- artifacts/runtime-smoke.json
+- runtime_smoke.source = "generated-fallback"
+- fallback_generated = true
+
+False-positive check:
+- forced cache miss before smoke
+- legacy path still passes
+
+Dirty before worker:
+- README.md
+
+Te:
+- GEN: 42s
+- DBG: 2m12s
+```
+
+See [docs/proof-example.md](docs/proof-example.md) for the full illustrative
+proof contract.
+
+## 🚀 Install
 
 Ask Codex to install the calibrated lane:
 
@@ -137,7 +210,7 @@ cp -R skills/tempofastlane .agents/skills/
 
 Restart Codex if the skill does not appear immediately.
 
-## Quick Start
+## 🚦 Quick Start
 
 Ask Codex:
 
@@ -153,7 +226,7 @@ Use $fastlane to delegate this bounded implementation slice to Spark. Keep
 ownership tight and require causal proof before acceptance.
 ```
 
-## What Makes It Different
+## 🧭 What Makes It Different
 
 Most agent repos teach what to know. Fastlane teaches how to delegate.
 
@@ -186,7 +259,7 @@ planner and starts creating lanes from measured execution reality.
 The repo is designed to make those gains measurable. Use `Te` and proof
 artifacts instead of asking users to trust a speed claim.
 
-## What Fastlane Is Not
+## 🛑 What Fastlane Is Not
 
 - A prompt library.
 - An "autonomous developer" pitch.
@@ -197,7 +270,7 @@ artifacts instead of asking users to trust a speed claim.
 
 It is a delegation protocol with measurable handoffs.
 
-## Proof Contract
+## 🧪 Proof Contract
 
 A worker handoff is not accepted because it sounds confident. It is accepted
 only when the parent can verify the causal signal.
@@ -212,10 +285,7 @@ Good proof answers:
 
 Velocity without proof is just faster drift.
 
-See [docs/proof-example.md](docs/proof-example.md) for an illustrative handoff
-shape with commands, proof signals, false-positive checks, and `Te` fields.
-
-## Composes With m1nd And L1GHT
+## 🧩 Composes With m1nd And L1GHT
 
 Fastlane becomes stronger when the parent has better structural context and
 better operational knowledge.
@@ -228,7 +298,7 @@ better operational knowledge.
 
 The combination is simple: discover better, delegate narrower, verify harder.
 
-## Repo Structure
+## 🗂️ Repo Structure
 
 ```text
 .
@@ -254,7 +324,7 @@ practice libraries. Fastlane enters a narrower and more ownable category:
 See [docs/market-map.md](docs/market-map.md) for the current landscape and
 [docs/positioning.md](docs/positioning.md) for the product narrative.
 
-## Validate
+## ✅ Validate
 
 Run the repo-local validator:
 
@@ -269,7 +339,7 @@ python3 ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/f
 python3 ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/tempofastlane
 ```
 
-## Trust Posture
+## 🔒 Trust Posture
 
 - No telemetry.
 - No secrets.
